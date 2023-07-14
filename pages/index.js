@@ -9,9 +9,10 @@ import SortByAlphaIcon from '@mui/icons-material/SortByAlpha';
 import { getCharacters } from '../src/services/characters-service'
 import NumberOfCharacters from '@/components/number-of-characters';
 import CharactersList from '@/components/characters-list';
+import CharacterOrder from '@/components/characters-order';
 
 export default function Home() {
-  const [order, setOrder] = React.useState('asc')
+  const [order, setOrder] = React.useState()
   const characters = getCharacters(order)
   return (
     <Container maxWidth="md">
@@ -19,7 +20,7 @@ export default function Home() {
         <Typography variant="h4" component="h1" gutterBottom>
           Marvel App - Characters
         </Typography>
-        Order by name: <button onClick={() => setOrder('asc')} style={order === 'asc' ? { color: 'Highlight' } : {}} >Asc</button> <button onClick={() => setOrder('desc')} style={order === 'desc' ? { color: 'Highlight' } : {}} >Desc</button>
+        <CharacterOrder order={order} onAscClick={() => setOrder('asc')} onDescClick={() => setOrder('desc')} />
         <CharactersList characters={characters} />
         <NumberOfCharacters characters={characters} />
         <Copyright />

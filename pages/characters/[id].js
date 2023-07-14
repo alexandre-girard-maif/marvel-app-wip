@@ -8,14 +8,15 @@ import Copyright from '../../src/Copyright';
 import { getCharacterBy } from '@/services/characters-service';
 // import { Date, MyPieChart } from '../../src/components/date';
 import Image from 'next/image';
-import { Avatar } from '@mui/material';
+import { Grid } from '@mui/material';
 import { useRouter } from 'next/router';
 import Date from '../../src/components/date';
 import MyPieChart from '../../src/components/my-pie-chart';
+import CharactersStatsArray from '@/components/character-stats-array';
 
 
 
-export default function Character() {
+export default function CharacterPage() {
   const router = useRouter()
 
   const character = getCharacterBy(router.query.id)
@@ -24,56 +25,56 @@ export default function Character() {
   return (
     <Container maxWidth="md">
       <Box sx={{ my: 4 }}>
-        <Typography variant="h4" component="h1" gutterBottom>
-          Marvel App - Characters
-        </Typography>
-        <Button variant="contained" component={Link} noLinkStyle href="/">
-          Go to the main page
-        </Button>
-        <div>
-          <h1>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6}>
+            <Typography variant="h4" component="h1" gutterBottom>
+              Marvel App - Characters
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Button variant="contained" component={Link} noLinkStyle href="/">
+              Go to the main page
+            </Button>
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <h1>
+              {character.name}
+            </h1>
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <h2>
+              <Date dateString={character.modified} />
+              </h2>
+          </Grid>
+          <Grid item xs={12} sm={2}>
             {character.thumbnail.path !== 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available' && (
-              <Avatar alt={character.name} src={character.thumbnail.path + '/standard_large' + '.' + character.thumbnail.extension} />
-            )}{character.name}
-          </h1>
-          <h2><Date dateString={character.modified} /></h2>
-          <p>
-            {character.description}
-          </p>
-
-          {character.thumbnail.path !== 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available' && (
-            <Image
-              src={character.thumbnail.path + '/standard_large' + '.' + character.thumbnail.extension} // Route of the image file
-              height={144} // Desired size with correct aspect ratio
-              width={144} // Desired size with correct aspect ratio
-              // className={utilStyles.borderCircle}
-              alt={character.name}
-            />
-          )}
-
-
-
-          <table >
-            <thead>
-              <tr>
-                <th>Comics</th>
-                <th>Series</th>
-                <th>Stories</th>
-                <th>Events</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{character.comics?.available}</td>
-                <td>{character.series?.available}</td>
-                <td>{character.stories?.available}</td>
-                <td>{character.events?.available}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <MyPieChart data={data} outerRadius={100} innerRadius={50} />
+              <Image
+                src={character.thumbnail.path + '/standard_large' + '.' + character.thumbnail.extension} // Route of the image file
+                height={144} // Desired size with correct aspect ratio
+                width={144} // Desired size with correct aspect ratio
+                // className={utilStyles.borderCircle}
+                style={{ borderRadius: '50%' }}
+                alt={character.name}
+              />
+            )}
+          </Grid>
+          <Grid item xs={12} sm={10}>
+            <p>
+              {character.description}
+            </p>
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <Typography variant="h4" component="h2" gutterBottom>
+              Statistics
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <CharactersStatsArray character={character} />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <MyPieChart data={data} outerRadius={100} innerRadius={50} />
+          </Grid>
+        </Grid>
         <Copyright />
       </Box>
     </Container>
