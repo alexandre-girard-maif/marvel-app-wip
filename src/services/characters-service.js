@@ -13,7 +13,7 @@ export function getData() {
  * @param {*} order 
  * @returns 
  */
-export function getCharacters(order) {
+export function getCharacters(order = 'asc', limit = 10) {
     let characters = getData()
     if (order === 'desc') {
         characters.sort((a, b) => {
@@ -34,7 +34,7 @@ export function getCharacters(order) {
           }
         })
       }
-    return characters
+    return characters.slice(0, limit)
 }
 
 /**
@@ -45,4 +45,8 @@ export function getCharacters(order) {
 export function getCharacterBy(id) {
     let characters = getData()
     return characters.find(character => character.id === id)
+}
+
+export function getNumberOfCharacters() {
+    return getData().length
 }

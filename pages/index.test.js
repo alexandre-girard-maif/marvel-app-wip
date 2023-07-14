@@ -19,7 +19,7 @@ describe('index', () => {
     const listItem = screen.getByText(/Thor/i)
     expect(listItem).toBeInTheDocument()
     expect(listItem).toHaveAttribute('href', '/characters/1009664')
-
+ 
     // except to find a button element with the text "Asc" with style color: Highlight
     const buttonAsc = screen.getByRole('button', {
       name: /Asc/i })
