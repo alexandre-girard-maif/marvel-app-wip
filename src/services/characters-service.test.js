@@ -7,14 +7,14 @@ test('getData returns data', () => {
 });
 
 test('getCharacters asc returns sorted characters asc', () => {
-    const characters = getCharacters('asc')
+    const characters = getCharacters('name', 'asc', 11)
 
     expect(characters.length).toBe(11);
     expect(characters[0].name).toEqual("Beast");
 });
 
 test('getCharacters desc returns sorted characters desc', () => {
-    const characters = getCharacters('desc')
+    const characters = getCharacters('name','desc', 11)
 
     expect(characters.length).toBe(11);
     expect(characters[0].name).toEqual("Wolverine");

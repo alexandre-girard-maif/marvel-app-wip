@@ -13,23 +13,23 @@ export function getData() {
  * @param {*} order 
  * @returns 
  */
-export function getCharacters(order = 'asc', limit = 10) {
+export function getCharacters(orderBy = 'name', order = 'asc', limit = 10) {
     let characters = getData()
     if (order === 'desc') {
         characters.sort((a, b) => {
-          if (a.name < b.name) {
+          if (a[orderBy] < b[orderBy]) {
             return 1
           }
-          if (a.name > b.name) {
+          if (a[orderBy] > b[orderBy]) {
             return -1
           }
         })
       } else {
         characters.sort((a, b) => {
-          if (a.name < b.name) {
+          if (a[orderBy] < b[orderBy]) {
             return -1
           }
-          if (a.name > b.name) {
+          if (a[orderBy] > b[orderBy]) {
             return 1
           }
         })

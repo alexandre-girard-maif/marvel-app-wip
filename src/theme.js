@@ -1,6 +1,6 @@
 import { Roboto } from 'next/font/google';
 import { createTheme } from '@mui/material/styles';
-import { blue, orange, red, blueGrey } from '@mui/material/colors';
+import { blueGrey, lightGreen, red } from '@mui/material/colors';
 
 export const roboto = Roboto({
   weight: ['300', '400', '500', '700'],
@@ -16,7 +16,7 @@ const theme = createTheme({
       main: blueGrey[500],
     },
     secondary: {
-      main: red[500],
+      main: lightGreen[500],
     },
     error: {
       main: red.A400,

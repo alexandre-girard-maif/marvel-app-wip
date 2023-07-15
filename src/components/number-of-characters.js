@@ -4,6 +4,6 @@
  * @param {*} characters List of characters 
  * @returns 
  */
-export default function NumberOfCharacters({ displayed, total }) { 
-    return <div>Number of characters: {displayed}/{total}</div>
+export default function NumberOfCharacters({ displayed = 0 }) { 
+    return <div>Number of characters: {displayed}</div>
 }

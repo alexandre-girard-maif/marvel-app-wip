@@ -9,22 +9,40 @@ import CharactersList from '@/components/characters-list';
 import MuiCharacterOrder from '@/components/mui-characters-order';
 import MuiCharactersList from '@/components/mui-characters-list';
 import Link from 'next/link';
+import MuiAppBar from '@/components/mui-app-bar';
+import { Grid } from '@mui/material';
+import MuiNumberOfCharacters from '@/components/mui-number-of-characters';
 
 export default function Home() {
   const [order, setOrder] = React.useState()
-  const characters = getCharacters(order, 8)
+  const [orderBy, setOrderBy] = React.useState('name')
+  const characters = getCharacters(orderBy, order, 8)
   const numberOfCharacters = getNumberOfCharacters()
   return (
     <Container maxWidth="md">
       <Box sx={{ my: 4 }}>
-        <Typography variant="h4" component="h1" gutterBottom>
-          Marvel App - Characters
-        </Typography>
-        <Link href="/">Go to the main page classic</Link> 
-        <MuiCharacterOrder order={order} onAscClick={() => setOrder('asc')} onDescClick={() => setOrder('desc')} />
-        <MuiCharactersList characters={characters} />
-        <NumberOfCharacters displayed={characters.length} total={numberOfCharacters} />
-        <Copyright />
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={12}>
+            <MuiAppBar />
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <MuiCharacterOrder order={order} orderBy={orderBy} 
+              onAscClickByName={() => {setOrder('asc'), setOrderBy('name')}} 
+              onDescClickByName={() => {setOrder('desc'), setOrderBy('name')}} 
+              onAscClickByModified={() => {setOrder('asc'), setOrderBy('modified')}} 
+              onDescClickByModified={() => {setOrder('desc'), setOrderBy('modified')}} 
+            />
+          </Grid>
+        </Grid>
+        <Grid item xs={12} sm={12}>
+          <MuiCharactersList characters={characters} />
+        </Grid>
+        <Grid item xs={12} sm={12}>
+          <MuiNumberOfCharacters displayed={characters.length} total={numberOfCharacters} />
+        </Grid>
+        <Grid item xs={12} sm={12}>
+          <Copyright />
+        </Grid>
       </Box>
     </Container>
   );
