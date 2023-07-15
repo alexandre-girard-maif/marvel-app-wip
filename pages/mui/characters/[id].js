@@ -14,12 +14,13 @@ import Date from '@//components/date';
 import MyPieChart from '@//components/my-pie-chart';
 import CharactersStatsArray from '@/components/character-stats-array';
 import MyBartChart from '@/components/my-bart-chart';
+import DonutChartSample from '@/components/donut-chart-sample';
 
 export default function CharacterPage() {
   const router = useRouter()
 
   const character = getCharacterBy(router.query.id)
-  const data = [{ label: 'Comics', value: character?.comics?.available }, { label: 'Series', value: character?.series?.available }, { label: 'Stories', value: character?.stories?.available }, { label: 'Events', value: character?.events?.available }];
+  const data = [{ name: 'Comics', value: character?.comics?.available }, { name: 'Series', value: character?.series?.available }, { name: 'Stories', value: character?.stories?.available }, { name: 'Events', value: character?.events?.available }];
 
   return (
     <Container maxWidth="md">
@@ -71,8 +72,7 @@ export default function CharacterPage() {
             <CharactersStatsArray character={character} />
           </Grid>
           <Grid item xs={12} sm={6}>
-            {/* <MyPieChart data={data} outerRadius={100} innerRadius={50} /> */}
-            {/* <MyBartChart data={data} /> */}
+            <DonutChartSample data={data} outerRadius={100} innerRadius={75} />
           </Grid>
         </Grid>
         <Copyright />
